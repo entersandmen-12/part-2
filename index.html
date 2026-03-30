@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY BIRTHDAY, FINESHYT!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, 
+                #0f0f23 0%, 
+                #1a1a3e 25%, 
+                #2a1b4d 50%, 
+                #1e3a5f 75%, 
+                #0f172a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animasi bintang latar belakang */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #a8b8ff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #a8b8ff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .music-control:hover {
+            background: rgba(59, 130, 246, 1);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .music-control.playing {
+            background: rgba(16, 185, 129, 0.9);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #e0e7ff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.8)); }
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .cake-container {
+            perspective: 1000px;
+            margin: 50px 0;
+        }
+
+        .cake {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: cakeFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes cakeFloat {
+            0%, 100% { transform: rotateX(0deg) rotateY(0deg) translateY(0px); }
+            50% { transform: rotateX(5deg) rotateY(5deg) translateY(-20px); }
+        }
+
+        .cake-layer {
+            position: absolute;
+            border-radius: 50% 50% 10px 10px;
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.3),
+                inset 0 2px 0 rgba(255,255,255,0.8),
+                0 0 30px rgba(147, 51, 234, 0.4);
+        }
+
+        .cake-layer-1 { width: 280px; height: 80px; top: 220px; left: 10px; }
+        .cake-layer-2 { width: 240px; height: 70px; top: 150px; left: 30px; background: linear-gradient(145deg, #f1f5f9, #cbd5e1); }
+        .cake-layer-3 { width: 200px; height: 60px; top: 90px; left: 50px; background: linear-gradient(145deg, #e2e8f0, #94a3b8); }
+        .cake-base { 
+            width: 320px; height: 40px; top: 260px; left: 0px; 
+            border-radius: 20px;
+            background: linear-gradient(145deg, #1e293b, #334155);
+        }
+
+        .candle {
+            position: absolute;
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(to top, #fbbf24, #f59e0b);
+            top: 50px;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+        }
+
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff6b6b, #ff4757);
+            border-radius: 50%;
+            animation: flameFlicker 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: translateX(-50%) translateY(0px) scale(1); }
+            100% { transform: translateX(-50%) translateY(-2px) scale(1.1); }
+        }
+
+        .candle:nth-child(1) { left: 80px; }
+        .candle:nth-child(2) { left: 140px; }
+        .candle:nth-child(3) { left: 200px; }
+
+        .card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.3),
+                0 0 50px rgba(99, 102, 241, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            animation: cardSlide 1s ease-out 0.5s both;
+            margin: 50px 0;
+        }
+
+        @keyframes cardSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .card-message {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #a5b4fc;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #c7d2fe, transparent);
+            border-radius: 50%;
+            animation: float 8s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cake {
+                width: 250px;
+                height: 250px;
+            }
+            .cake-layer-1 { width: 230px; height: 70px; top: 180px; left: 10px; }
+            .cake-layer-2 { width: 200px; height: 60px; top: 120px; left: 25px; }
+            .cake-layer-3 { width: 160px; height: 50px; top: 70px; left: 45px; }
+            .cake-base { width: 270px; height: 35px; top: 215px; }
+            .card { padding: 30px 20px; margin: 30px 10px; }
+        }
+
+        /* Tombol share */
+        .share-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            z-index: 100;
+        }
+
+        .share-btn:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- Kontrol Musik -->
+    <div class="music-control" id="musicControl" onclick="toggleMusic()">
+        🎵 Musik: OFF
+    </div>
+
+    <!-- Iframe YouTube (hidden) -->
+    <iframe id="youtubePlayer" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen 
+            style="display: none;">
+    </iframe>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <h1 class="main-title">This a gift for you</h1>
+        <p class="subtitle">Hope you'll happy when you received this!</p>
+
+        <!-- Kue -->
+        <div class="cake-container">
+            <div class="cake">
+                <div class="cake-layer cake-layer-1"></div>
+                <div class="cake-layer cake-layer-2"></div>
+                <div class="cake-layer cake-layer-3"></div>
+                <div class="cake-base"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+            </div>
+        </div>
+
+        <!-- Kartu Ucapan -->
+        <div class="card">
+            <h2 class="card-title">SUPRISEEE</h2>
+            <p class="card-message">
+                Hey! it's your birthday, i hope all the best things come your way, and that life becomes a little
+                more gentle with you.
+
+                Even for the things you never spoke about, i hope life warms your heart and brings your comfort
+                May your life be sorrounded with by good people, and may you always find happiness in the little things.
+                
+                happy birthday, kak!
+                
+            <div class="signature">
+               with love, 
+               Arsyi
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Share -->
+    <button class="share-btn" onclick="shareBirthday()">
+    </button>
+
+    <script>
+        // Toggle Musik
+        const musicControl = document.getElementById('musicControl');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (!isPlaying) {
+                youtubePlayer.src = youtubePlayer.src.replace('autoplay=0', 'autoplay=1');
+                musicControl.textContent = '🎵 Musik: ON';
+                musicControl.classList.add('playing');
+                isPlaying = true;
+            } else {
+                youtubePlayer.src = youtubePlayer.src.replace('autoplay=1', 'autoplay=0');
+                musicControl.textContent = '🎵 Musik: OFF';
+                musicControl.classList.remove('playing');
+                isPlaying = false;
+            }
+        }
+
+        // Buat Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particlesContainer.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }, 300);
+        }
+
+        // Share Function
+        function shareBirthday() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Happy Birthday!',
+                });
+            }
+        }
+
+        // Inisialisasi
+        window.addEventListener('load', () => {
+            createParticles();
+            
+            // Auto play musik setelah user interaction (untuk mobile)
+            setTimeout(() => {
+                if (!isPlaying) {
+                    musicControl.style.background = 'rgba(16, 185, 129, 0.7)';
+                }
+            }, 2000);
+        });
+
+        // Responsive cake candles untuk mobile
+        window.addEventListener('resize', () => {
+            const candles = document.querySelectorAll('.candle');
+            if (window.innerWidth < 768) {
+                candles[0].style.left = '60px';
+                candles[1].style.left = '115px';
+                candles[2].style.left = '170px';
+            } else {
+                candles[0].style.left = '80px';
+                candles[1].style.left = '140px';
+                candles[2].style.left = '200px';
+            }
+        });
+    </script>
+</body>
+</html>
